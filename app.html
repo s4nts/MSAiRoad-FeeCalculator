@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSAi Rodoviário - Calculadora de Taxas</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        margin: 20px;
+        background-color: #f8f9fa;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .section-title {
+        background: #f1f3f4;
+        padding: 12px 20px;
+        margin: 0;
+        font-weight: 600;
+        color: #1a73e8;
+        border-left: 4px solid #1a73e8;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        padding: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        min-width: 1200px;
+      }
+
+      th,
+      td {
+        padding: 8px 6px;
+        text-align: left;
+        border: 1px solid #e0e0e0;
+        white-space: nowrap;
+      }
+
+      th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        color: #5f6368;
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tbody tr:hover {
+        background-color: #e8f0fe;
+      }
+
+      .valor-monetario {
+        text-align: right;
+        font-weight: 500;
+      }
+
+      .calculator-section {
+        background: #f8f9fa;
+        border-top: 3px solid #34a853;
+      }
+
+      .calculator-table th {
+        background-color: #e8f5e8;
+        color: #137333;
+      }
+
+      .total-row {
+        background-color: #e8f5e8 !important;
+        font-weight: 600;
+        color: #137333;
+      }
+
+      .highlight-new {
+        background-color: #fff3cd !important;
+        border-left: 4px solid #ffc107;
+      }
+
+      .input-field {
+        padding: 4px 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 80px;
+        text-align: right;
+      }
+
+      .tax-label {
+        font-size: 10px;
+        color: #666;
+        font-style: italic;
+      }
+
+      .new-feature-badge {
+        background: #34a853;
+        color: white;
+        font-size: 10px;
+        padding: 2px 6px;
+        border-radius: 12px;
+        margin-left: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>MSAi Rodoviário - Consulta de Frete com Calculadora de Taxas</h1>
+      </div>
+
+      <h3 class="section-title">Resultados de Frete Base (Atual)</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2">Validade</th>
+              <th rowspan="2">Resolução</th>
+              <th colspan="2">Origem</th>
+              <th colspan="2">Destino</th>
+              <th rowspan="2">Tipo de Carga</th>
+              <th rowspan="2">Eixo</th>
+              <th rowspan="2">TT</th>
+              <th colspan="3">Frete (BRL)</th>
+            </tr>
+            <tr>
+              <th>Estado</th>
+              <th>Cidade</th>
+              <th>Estado</th>
+              <th>Cidade</th>
+              <th>Mínimo</th>
+              <th>Médio</th>
+              <th>Máximo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024-01<br />2024-02</td>
+              <td>Portaria Nº 202</td>
+              <td>SC</td>
+              <td>Itajaí</td>
+              <td>PR</td>
+              <td>Paranaguá</td>
+              <td>Carga geral</td>
+              <td>2</td>
+              <td>3,41</td>
+              <td class="valor-monetario">1.023,03</td>
+              <td class="valor-monetario">1.184,33</td>
+              <td class="valor-monetario">1.345,63</td>
+            </tr>
+            <tr>
+              <td>2024-01<br />2024-02</td>
+              <td>Resolução Nº 6.034</td>
+              <td>SC</td>
+              <td>Itajaí</td>
+              <td>PR</td>
+              <td>Paranaguá</td>
+              <td>Carga geral</td>
+              <td>2</td>
+              <td>3,41</td>
+              <td class="valor-monetario">1.100,31</td>
+              <td class="valor-monetario">1.249,95</td>
+              <td class="valor-monetario">1.399,60</td>
+            </tr>
+            <tr>
+              <td>2024-02<br />2024-03</td>
+              <td>Resolução Nº 6.034</td>
+              <td>SC</td>
+              <td>Itajaí</td>
+              <td>PR</td>
+              <td>Paranaguá</td>
+              <td>Carga geral</td>
+              <td>2</td>
+              <td>3,41</td>
+              <td class="valor-monetario">1.100,31</td>
+              <td class="valor-monetario">1.315,18</td>
+              <td class="valor-monetario">1.530,04</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="calculator-section">
+        <h3 class="section-title">
+          Calculadora de Taxas Complementares
+          <span class="new-feature-badge">NOVA FUNCIONALIDADE</span>
+        </h3>
+        <div class="table-container">
+          <div
+            style="
+              margin-bottom: 15px;
+              padding: 10px;
+              background: #fff3cd;
+              border-radius: 4px;
+              border-left: 4px solid #ffc107;
+            "
+          >
+            <strong>📋 Parâmetros para Cálculo:</strong>
+            <div style="margin-top: 8px; display: flex; gap: 20px; flex-wrap: wrap">
+              <label
+                >Valor da Carga (R$): <input type="text" class="input-field" value="50.000,00" id="valorCarga"
+              /></label>
+              <label>Peso (kg): <input type="text" class="input-field" value="15.000" id="peso" /></label>
+              <label>Distância (km): <input type="text" class="input-field" value="280" id="distancia" /></label>
+            </div>
+          </div>
+
+          <table class="calculator-table">
+            <thead>
+              <tr>
+                <th>Resolução</th>
+                <th>Taxa</th>
+                <th>Base de Cálculo</th>
+                <th>Alíquota/Valor</th>
+                <th>Valor da Taxa (R$)</th>
+                <th>Frete Base (R$)</th>
+                <th>Total com Taxas (R$)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Portaria Nº 202 -->
+              <tr>
+                <td rowspan="4" style="vertical-align: middle; font-weight: 600">
+                  Portaria Nº 202<br /><small class="tax-label">Valores médios</small>
+                </td>
+                <td>ICMS</td>
+                <td>SC → PR</td>
+                <td>12,00%</td>
+                <td class="valor-monetario">142,12</td>
+                <td class="valor-monetario">1.184,33</td>
+                <td
+                  class="valor-monetario"
+                  rowspan="4"
+                  style="vertical-align: middle; font-size: 14px; font-weight: 600"
+                >
+                  1.576,45
+                </td>
+              </tr>
+              <tr class="highlight-new">
+                <td>Ad Valorem</td>
+                <td>R$ 50.000,00</td>
+                <td>0,50%</td>
+                <td class="valor-monetario">250,00</td>
+                <td class="valor-monetario">-</td>
+              </tr>
+              <tr class="highlight-new">
+                <td>Pedágio</td>
+                <td>280 km</td>
+                <td>R$ 0,18/km</td>
+                <td class="valor-monetario">50,40</td>
+                <td class="valor-monetario">-</td>
+              </tr>
+              <tr class="total-row">
+                <td colspan="4"><strong>TOTAL DE TAXAS</strong></td>
+                <td class="valor-monetario"><strong>442,52</strong></td>
+                <td class="valor-monetario">-</td>
+              </tr>
+
+              <!-- Resolução Nº 6.034 (primeira) -->
+              <tr>
+                <td rowspan="4" style="vertical-align: middle; font-weight: 600">
+                  Resolução Nº 6.034<br /><small class="tax-label">Jan-Fev 2024</small>
+                </td>
+                <td>ICMS</td>
+                <td>SC → PR</td>
+                <td>12,00%</td>
+                <td class="valor-monetario">149,99</td>
+                <td class="valor-monetario">1.249,95</td>
+                <td
+                  class="valor-monetario"
+                  rowspan="4"
+                  style="vertical-align: middle; font-size: 14px; font-weight: 600"
+                >
+                  1.642,46
+                </td>
+              </tr>
+              <tr class="highlight-new">
+                <td>Ad Valorem</td>
+                <td>R$ 50.000,00</td>
+                <td>0,50%</td>
+                <td class="valor-monetario">250,00</td>
+                <td class="valor-monetario">-</td>
+              </tr>
+              <tr class="highlight-new">
+                <td>Pedágio</td>
+                <td>280 km</td>
+                <td>R$ 0,18/km</td>
+                <td class="valor-monetario">50,40</td>
+                <td class="valor-monetario">-</td>
+              </tr>
+              <tr class="total-row">
+                <td colspan="4"><strong>TOTAL DE TAXAS</strong></td>
+                <td class="valor-monetario"><strong>450,39</strong></td>
+                <td class="valor-monetario">-</td>
+              </tr>
+
+              <!-- Resolução Nº 6.034 (segunda) -->
+              <tr>
+                <td rowspan="4" style="vertical-align: middle; font-weight: 600">
+                  Resolução Nº 6.034<br /><small class="tax-label">Fev-Mar 2024</small>
+                </td>
+                <td>ICMS</td>
+                <td>SC → PR</td>
+                <td>12,00%</td>
+                <td class="valor-monetario">157,82</td>
+                <td class="valor-monetario">1.315,18</td>
+                <td
+                  class="valor-monetario"
+                  rowspan="4"
+                  style="vertical-align: middle; font-size: 14px; font-weight: 600"
+                >
+                  1.723,40
+                </td>
+              </tr>
+              <tr class="highlight-new">
+                <td>Ad Valorem</td>
+                <td>R$ 50.000,00</td>
+                <td>0,50%</td>
+                <td class="valor-monetario">250,00</td>
+                <td class="valor-monetario">-</td>
+              </tr>
+              <tr class="highlight-new">
+                <td>Pedágio</td>
+                <td>280 km</td>
+                <td>R$ 0,18/km</td>
+                <td class="valor-monetario">50,40</td>
+                <td class="valor-monetario">-</td>
+              </tr>
+              <tr class="total-row">
+                <td colspan="4"><strong>TOTAL DE TAXAS</strong></td>
+                <td class="valor-monetario"><strong>458,22</strong></td>
+                <td class="valor-monetario">-</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div
+            style="
+              margin-top: 15px;
+              padding: 15px;
+              background: #e8f5e8;
+              border-radius: 4px;
+              border-left: 4px solid #34a853;
+            "
+          >
+            <h4 style="margin: 0 0 10px 0; color: #137333">💡 Informações Importantes:</h4>
+            <ul style="margin: 0; padding-left: 20px; color: #137333">
+              <li><strong>ICMS:</strong> Calculado automaticamente com base na tabela pública origem × destino</li>
+              <li>
+                <strong>Ad Valorem:</strong> Taxa de seguro calculada sobre o valor da carga (percentual padrão de
+                mercado)
+              </li>
+              <li><strong>Pedágio:</strong> Estimativa baseada na distância da rota (valor médio por km)</li>
+              <li>
+                <strong>Valores:</strong> Todos os cálculos são estimativos e podem variar conforme negociação
+                específica
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
