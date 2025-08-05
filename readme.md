@@ -2,7 +2,7 @@
 
 ## 📋 Visão Geral
 
-O **MSAi Rodoviário** é uma ferramenta essencial para consulta de valores de frete com base no peso transportado. Esta funcionalidade adiciona uma **calculadora complementar** que estima o valor final do frete incluindo taxas obrigatórias do transporte rodoviário brasileiro.
+O **MSAi Rodoviário** é uma ferramenta essencial para consulta de valores de frete com base no peso transportado. Esta funcionalidade adiciona uma **calculadora complementar** que estima o valor final do frete incluindo taxas obrigatórias do transporte rodoviário.
 
 ## 🎯 Objetivo
 
@@ -29,12 +29,12 @@ Atualmente, o MSAi Rodoviário apresenta **valores incompletos**, pois não cons
 
 #### 📊 Taxas Contempladas
 
-| Taxa             | Base de Cálculo                 | Fonte dos Dados                 | Status          |
-| ---------------- | ------------------------------- | ------------------------------- | --------------- |
-| **ICMS**         | Tabela pública origem × destino | Tabela estadual oficial         | ✅ Implementado |
-| **Ad Valorem**   | Percentual sobre valor da carga | Tabela padrão de mercado        | ✅ Implementado |
-| **Pedágio**      | Valor por quilômetro da rota    | Estimativa baseada em distância | ✅ Implementado |
-| **Outras taxas** | Conforme aplicabilidade         | A definir                       | 🔄 Futuro       |
+| Taxa             | Base de Cálculo                 | Fonte dos Dados                 |
+| ---------------- | ------------------------------- | ------------------------------- |
+| **ICMS**         | Tabela pública origem × destino | Tabela estadual oficial         |
+| **Ad Valorem**   | Percentual sobre valor da carga | Tabela padrão de mercado        |
+| **Pedágio**      | Valor por quilômetro da rota    | Estimativa baseada em distância |
+| **Outras taxas** | Conforme aplicabilidade         | A definir                       |
 
 ## 🛠️ Especificações Técnicas
 
@@ -84,34 +84,7 @@ Valor Pedágio = Distância (km) × Valor por km
 - **Base**: Estimativa baseada em rotas principais
 - **Observação**: Valor aproximado para fins de estimativa
 
-### Estrutura de Dados
-
-#### Tabela de Saída
-
-```sql
-CREATE TABLE msai_calculadora_taxas (
-    id INTEGER PRIMARY KEY,
-    resolucao VARCHAR(50),
-    periodo VARCHAR(20),
-    origem_estado VARCHAR(2),
-    origem_cidade VARCHAR(100),
-    destino_estado VARCHAR(2),
-    destino_cidade VARCHAR(100),
-    frete_base DECIMAL(10,2),
-    icms_aliquota DECIMAL(5,2),
-    icms_valor DECIMAL(10,2),
-    ad_valorem_percentual DECIMAL(5,2),
-    ad_valorem_valor DECIMAL(10,2),
-    pedagio_valor DECIMAL(10,2),
-    total_taxas DECIMAL(10,2),
-    valor_final DECIMAL(10,2),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-## 📱 Interface do Usuário
-
-### Layout da Calculadora
+## Layout da Calculadora
 
 #### Seção 1: Parâmetros de Entrada
 
@@ -139,12 +112,6 @@ CREATE TABLE msai_calculadora_taxas (
 - **Amarelo (#ffc107)**: Campos editáveis e destaques
 - **Azul (#1a73e8)**: Títulos e elementos de navegação
 - **Cinza (#f8f9fa)**: Backgrounds e separadores
-
-#### Responsividade
-
-- Tabelas com scroll horizontal em dispositivos móveis
-- Campos de entrada adaptáveis ao tamanho da tela
-- Tooltips informativos para melhor UX
 
 ## 🔄 Fluxo de Funcionamento
 
@@ -215,52 +182,6 @@ graph TD
 - Acesso à base de dados do MSAi Rodoviário
 - Tabela ICMS atualizada (fornecida pelo Pablo)
 - Configuração de API para cálculos em tempo real
-
-### Passos de Implementação
-
-#### 1. Configuração da Base de Dados
-
-```sql
--- Criação das tabelas de apoio
-CREATE TABLE icms_aliquotas (
-    origem_estado VARCHAR(2),
-    destino_estado VARCHAR(2),
-    aliquota DECIMAL(5,2),
-    vigencia_inicio DATE,
-    vigencia_fim DATE
-);
-
-CREATE TABLE ad_valorem_tipos (
-    tipo_carga VARCHAR(50),
-    percentual DECIMAL(5,2),
-    ativo BOOLEAN DEFAULT TRUE
-);
-```
-
-#### 2. Integração com Frontend
-
-```javascript
-// Exemplo de integração
-const calcularTaxas = (freteBase, valorCarga, peso, distancia) => {
-  const icms = calcularICMS(freteBase, origemUF, destinoUF);
-  const adValorem = calcularAdValorem(valorCarga);
-  const pedagio = calcularPedagio(distancia);
-
-  return {
-    icms,
-    adValorem,
-    pedagio,
-    total: icms + adValorem + pedagio,
-    valorFinal: freteBase + icms + adValorem + pedagio,
-  };
-};
-```
-
-#### 3. Configuração de APIs
-
-- Endpoint para consulta de alíquotas ICMS
-- Serviço de cálculo de taxas em tempo real
-- Cache para otimização de performance
 
 ## 📈 Métricas e Monitoramento
 
