@@ -84,43 +84,55 @@
       </div>
 
       <div class="calculator-section">
-        <h3 class="section-title">
-          Calculadora de Taxas Complementares
-          <span class="new-feature-badge">NOVA FUNCIONALIDADE</span>
-        </h3>
+        <h3 class="section-title">Calculadora de Taxas Complementares</h3>
         <div class="table-container">
-          <div class="parameters-section">
-            <strong style="color: #212121">📋 Parâmetros para Cálculo:</strong>
+          <fieldset class="parameters-section">
+            <legend>📋 Parâmetros para Cálculo:</legend>
             <div class="parameters-grid">
-              <label style="color: #212121">
-                Valor da Carga (R$):
-                <input
-                  type="text"
-                  class="input-field"
-                  value="50.000,00"
-                  id="valorCarga"
-                  onblur="formatCurrency(this)"
-                />
-              </label>
-              <label style="color: #212121">
-                Peso (kg):
-                <input type="text" class="input-field" value="15.000" id="peso" onblur="formatNumber(this)" />
-              </label>
-              <div style="color: #212121">
-                <strong>Frete de Retorno:</strong>
+              <div class="parameter-group">
+                <label for="valorCarga">Valor da Carga (R$):</label>
+                <input type="text" class="form-control" value="50.000,00" id="valorCarga" />
+                <div class="error-message" id="valorCargaError"></div>
+              </div>
+
+              <div class="parameter-group">
+                <label for="peso">Peso (kg):</label>
+                <input type="text" class="form-control" value="15.000" id="peso" />
+                <div class="error-message" id="pesoError"></div>
+              </div>
+
+              <div class="parameter-group">
+                <label for="tipoCarga">Tipo de Carga:</label>
+                <select class="form-control" id="tipoCarga">
+                  <option value="Carga geral">Carga geral</option>
+                </select>
+              </div>
+
+              <div class="parameter-group">
+                <label for="eixoCaminhao">Eixo do Caminhão:</label>
+                <select class="form-control" id="eixoCaminhao">
+                  <option value="2">2 eixos</option>
+                </select>
+              </div>
+
+              <div class="parameter-group">
+                <label>Frete de Retorno:</label>
                 <div class="radio-group">
                   <label><input type="radio" name="freteRetorno" value="nao" checked /> Não</label>
                   <label><input type="radio" name="freteRetorno" value="sim" /> Sim</label>
                 </div>
               </div>
-              <button class="calculate-btn" onclick="calcularTaxas()">Calcular</button>
+
+              <button class="calculate-btn" id="calculateBtn">Calcular</button>
             </div>
-          </div>
+          </fieldset>
 
           <table class="calculator-table" id="calculatorTable">
             <thead>
               <tr>
                 <th>Resolução</th>
+                <th>Tipo de Carga</th>
+                <th>Eixo</th>
                 <th>Taxa</th>
                 <th>Base de Cálculo</th>
                 <th>Alíquota/Valor</th>

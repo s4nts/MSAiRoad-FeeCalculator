@@ -1,21 +1,33 @@
+:root {
+  --primary-color: #f04e23;
+  --primary-dark: #d63918;
+  --text-primary: #212121;
+  --text-secondary: #7a7a7a;
+  --border-color: #bdbdbd;
+  --background-light: #ffffff;
+  --background-grey: #f5f5f5;
+  --highlight-soft: #f7a089;
+  --body-bg: #e0e0e0;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   margin: 20px;
-  background-color: #bdbdbd;
-  color: #7a7a7a;
+  background-color: var(--body-bg);
+  color: var(--text-secondary);
 }
 
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  background: #ffffff;
+  background: var(--background-light);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
 .header {
-  background: linear-gradient(135deg, #f04e23 0%, #d63918 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: white;
   padding: 20px;
   text-align: center;
@@ -28,12 +40,12 @@ body {
 }
 
 .section-title {
-  background: #ffffff;
+  background: var(--background-light);
   padding: 12px 20px;
   margin: 0;
   font-weight: 600;
-  color: #212121;
-  border-left: 4px solid #f04e23;
+  color: var(--text-primary);
+  border-left: 4px solid var(--primary-color);
 }
 
 .table-container {
@@ -52,24 +64,25 @@ th,
 td {
   padding: 8px 6px;
   text-align: left;
-  border: 1px solid #bdbdbd;
+  border: 1px solid var(--border-color);
   white-space: nowrap;
+  vertical-align: middle;
 }
 
 th {
-  background-color: #bdbdbd;
+  background-color: var(--border-color);
   font-weight: 600;
-  color: #212121;
+  color: var(--text-primary);
   font-size: 11px;
   text-transform: uppercase;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: var(--background-grey);
 }
 
-tbody tr:hover {
-  background-color: #f7a089;
+.calculator-table tbody tr:not(.total-row):hover {
+  background-color: var(--highlight-soft);
 }
 
 .valor-monetario {
@@ -78,165 +91,185 @@ tbody tr:hover {
 }
 
 .calculator-section {
-  background: #f5f5f5;
-  border-top: 3px solid #f04e23;
+  background: var(--background-grey);
+  border-top: 3px solid var(--primary-color);
 }
 
 .calculator-table th {
-  background-color: #ffffff;
-  color: #212121;
+  background-color: var(--background-light);
+  color: var(--text-primary);
 }
 
 .total-row {
-  background-color: #f04e23 !important;
+  background-color: var(--primary-color) !important;
   font-weight: 600;
   color: white !important;
 }
 
-.highlight-new {
-  background-color: #f7a089 !important;
-  border-left: 4px solid #f04e23;
-}
-
-.input-field {
+.form-control {
   padding: 8px 12px;
-  border: 2px solid #bdbdbd;
+  border: 2px solid var(--border-color);
   border-radius: 4px;
-  width: 120px;
-  text-align: right;
+  width: 180px;
   font-weight: 500;
-  background: #ffffff;
+  background: var(--background-light);
   transition: border-color 0.2s;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 14px;
 }
 
-.input-field:focus {
-  border-color: #f04e23;
+input.form-control {
+  text-align: right;
+}
+
+select.form-control {
+  cursor: pointer;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
   outline: none;
 }
 
 .tax-label {
   font-size: 10px;
-  color: #7a7a7a;
+  color: var(--text-secondary);
   font-style: italic;
 }
 
-.new-feature-badge {
-  background: #f04e23;
-  color: white;
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 12px;
-  margin-left: 8px;
-}
-
 .calculate-btn {
-  background: #f04e23;
+  background: var(--primary-color);
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 10px 24px;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   margin-left: 15px;
+  align-self: flex-end;
+  height: 40px;
 }
 
-.calculate-btn:hover {
-  background: #d63918;
+.calculate-btn:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+.calculate-btn:disabled {
+  background-color: var(--border-color);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 0.8;
 }
 
 .parameters-section {
   margin-bottom: 15px;
   padding: 15px;
-  background: #ffffff;
+  background: var(--background-light);
   border-radius: 6px;
-  border-left: 4px solid #f04e23;
+  border: 1px solid var(--border-color);
+}
+.parameters-section legend {
+  font-weight: bold;
+  color: var(--text-primary);
+  padding: 0 5px;
 }
 
 .parameters-grid {
   display: flex;
   gap: 25px;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 12px;
+}
+
+.parameter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.parameter-group label {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-primary);
 }
 
 .radio-group {
   display: flex;
   gap: 15px;
   align-items: center;
+  padding-top: 5px;
+  height: 30px;
+}
+.radio-group label {
+  font-weight: normal;
 }
 
 .radio-group input[type='radio'] {
-  accent-color: #f04e23;
+  accent-color: var(--primary-color);
 }
 
 .info-box {
   margin-top: 15px;
   padding: 15px;
-  background: #ffffff;
+  background: var(--background-light);
   border-radius: 4px;
-  border-left: 4px solid #f04e23;
+  border-left: 4px solid var(--primary-color);
 }
-
 .info-box h4 {
   margin: 0 0 10px 0;
-  color: #212121;
+  color: var(--text-primary);
 }
-
 .info-box ul {
   margin: 0;
   padding-left: 20px;
-  color: #7a7a7a;
-}
-
-.return-detail-row {
-  background-color: #f7a089 !important;
-  font-style: italic;
-  color: #212121;
+  color: var(--text-secondary);
 }
 
 .distance-info {
   font-size: 10px;
-  color: #7a7a7a;
+  color: var(--text-secondary);
   margin-left: 5px;
+}
+
+.error-message {
+  color: var(--primary-dark);
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+  min-height: 18px;
 }
 
 @media (max-width: 1024px) {
   body {
     margin: 10px;
   }
-
   .container {
     max-width: 100%;
     border-radius: 4px;
   }
-
   .header h1 {
     font-size: 20px;
   }
-
   .table-container {
     padding: 15px;
   }
-
   table {
     min-width: 900px;
     font-size: 11px;
   }
-
   th,
   td {
     padding: 6px 4px;
   }
-
   .parameters-grid {
     gap: 20px;
   }
-
-  .input-field {
-    width: 100px;
+  .form-control {
+    width: 150px;
   }
 }
 
@@ -244,160 +277,64 @@ tbody tr:hover {
   body {
     margin: 5px;
   }
-
   .header {
     padding: 15px 10px;
   }
-
   .header h1 {
     font-size: 18px;
     line-height: 1.3;
   }
-
   .section-title {
     padding: 10px 15px;
     font-size: 14px;
   }
-
   .table-container {
     padding: 10px;
     overflow-x: auto;
   }
-
   table {
     min-width: 700px;
     font-size: 10px;
   }
-
   th,
   td {
     padding: 5px 3px;
   }
-
   .valor-monetario {
     font-size: 10px;
   }
-
   .parameters-section {
     padding: 12px;
   }
-
   .parameters-grid {
     flex-direction: column;
     gap: 15px;
     align-items: stretch;
   }
-
-  .parameters-grid label {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .input-field {
+  .parameter-group {
     width: 100%;
-    max-width: 200px;
   }
-
+  .form-control {
+    width: 100%;
+    max-width: 250px;
+  }
   .radio-group {
     flex-wrap: wrap;
     gap: 10px;
   }
-
   .calculate-btn {
     margin-left: 0;
     width: 100%;
-    max-width: 200px;
+    max-width: 250px;
+    align-self: initial;
   }
-
-  .new-feature-badge {
-    display: block;
-    margin: 5px 0 0 0;
-    width: fit-content;
-  }
-
   .info-box {
     padding: 12px;
   }
-
   .info-box h4 {
     font-size: 14px;
   }
-
   .info-box ul {
     font-size: 12px;
-  }
-}
-
-@media (max-width: 390px) {
-  .header {
-    padding: 12px 8px;
-  }
-
-  .header h1 {
-    font-size: 16px;
-  }
-
-  .section-title {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  .table-container {
-    padding: 8px;
-  }
-
-  table {
-    min-width: 600px;
-    font-size: 9px;
-  }
-
-  th,
-  td {
-    padding: 4px 2px;
-  }
-
-  .parameters-section {
-    padding: 10px;
-  }
-
-  .parameters-grid {
-    gap: 12px;
-  }
-
-  .input-field {
-    padding: 6px 8px;
-    font-size: 14px;
-  }
-
-  .calculate-btn {
-    padding: 10px 20px;
-    font-size: 13px;
-  }
-
-  .info-box {
-    padding: 10px;
-  }
-
-  .info-box h4 {
-    font-size: 13px;
-  }
-
-  .info-box ul {
-    font-size: 11px;
-    padding-left: 16px;
-  }
-
-  .tax-label {
-    font-size: 8px;
-  }
-
-  .distance-info {
-    font-size: 8px;
-  }
-
-  .new-feature-badge {
-    font-size: 9px;
-    padding: 1px 4px;
   }
 }
